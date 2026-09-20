@@ -1,55 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="auto">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI Assistant Command Center - Urdu and Sindhi AI command center." />
+  <meta name="description" content="AI Assistant Command Center - Urdu, Sindhi and English command center." />
   <title>AI Assistant Command Center</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div id="app">
     <header class="topbar">
-      <div>
-        <div class="eyebrow">AI OFFICE</div>
-        <h1>AI Assistant Command Center</h1>
-      </div>
-      <div class="status"><span class="status-dot"></span> SYSTEM READY</div>
+      <div><div class="eyebrow">AI OFFICE • COMMAND CENTER</div><h1>AI Assistant Command Center</h1></div>
+      <div class="status"><span class="status-dot"></span><span id="systemStatus">SYSTEM READY</span></div>
     </header>
 
     <main class="command-center">
-      <section class="core-panel" aria-label="AI Core">
-        <div class="core-orbit orbit-one"></div>
-        <div class="core-orbit orbit-two"></div>
-        <div class="ai-core">
-          <div class="core-label">AI CORE</div>
-          <div class="core-title">COMMAND<br />CENTER</div>
+      <section class="core-panel">
+        <div class="core-orbit orbit-one"></div><div class="core-orbit orbit-two"></div>
+        <div class="ai-core" id="core">
+          <div class="core-label">AI CORE</div><div class="core-title">COMMAND<br> CENTER</div>
           <div class="core-subtitle">Urdu • Sindhi • English</div>
         </div>
       </section>
 
       <section class="modules" aria-label="System modules">
-        <button class="module" data-module="tasks"><span>01</span><strong>Task Engine</strong><small>Tasks & execution</small></button>
-        <button class="module" data-module="memory"><span>02</span><strong>Memory</strong><small>Context & history</small></button>
-        <button class="module" data-module="automation"><span>03</span><strong>Automation</strong><small>Workflows</small></button>
-        <button class="module" data-module="website"><span>04</span><strong>Website Engine</strong><small>Build & publish</small></button>
-        <button class="module" data-module="media"><span>05</span><strong>Media Engine</strong><small>Content generation</small></button>
-        <button class="module" data-module="review"><span>06</span><strong>Review Center</strong><small>Approve & regenerate</small></button>
+        <button class="module" data-module="tasks"><span>01</span><strong>Task Engine</strong><small id="taskCount">0 tasks</small></button>
+        <button class="module" data-module="memory"><span>02</span><strong>Memory</strong><small>Browser memory</small></button>
+        <button class="module" data-module="automation"><span>03</span><strong>Automation</strong><small>Workflow ready</small></button>
+        <button class="module" data-module="website"><span>04</span><strong>Website Engine</strong><small>Build & preview</small></button>
+        <button class="module" data-module="media"><span>05</span><strong>Media Engine</strong><small>Content pipeline</small></button>
+        <button class="module" data-module="review"><span>06</span><strong>Review Center</strong><small id="reviewCount">0 awaiting review</small></button>
       </section>
 
-      <section class="command-panel">
-        <label for="commandInput">COMMAND</label>
-        <div class="command-input">
-          <input id="commandInput" type="text" placeholder="اپنا حکم لکھیں — مثال: یہ ویڈیو Review Center میں تیار کرو" autocomplete="off" />
-          <button id="sendCommand">SEND</button>
+      <section class="workspace">
+        <div class="command-panel">
+          <label for="commandInput">COMMAND</label>
+          <div class="command-input">
+            <input id="commandInput" dir="auto" type="text" placeholder="اپنا حکم لکھیں — مثال: نیا کام بنائیں" autocomplete="off" />
+            <button id="sendCommand">SEND</button>
+          </div>
+          <div class="quick-actions">
+            <button data-command="نیا کام بنائیں">New Task</button>
+            <button data-command="Review Center کھولیں">Review Center</button>
+            <button data-command="Website Engine کھولیں">Website Engine</button>
+            <button data-command="سسٹم کی حالت دکھائیں">System Status</button>
+          </div>
+          <div id="response" class="response">AI Core تیار ہے۔ Urdu، Sindhi یا English command دیں۔</div>
         </div>
-        <div class="quick-actions">
-          <button data-command="Create a new task">New Task</button>
-          <button data-command="Open Review Center">Review Center</button>
-          <button data-command="Open Website Engine">Website Engine</button>
-          <button data-command="Show system status">System Status</button>
-        </div>
-        <div id="response" class="response">AI Core is ready. Enter an Urdu, Sindhi, or English command.</div>
+
+        <aside class="live-panel">
+          <div class="panel-title">LIVE WORKSPACE</div>
+          <div class="tabs">
+            <button class="tab active" data-tab="tasks">Tasks</button>
+            <button class="tab" data-tab="review">Review</button>
+            <button class="tab" data-tab="memory">Memory</button>
+          </div>
+          <div id="workspaceContent" class="workspace-content"></div>
+        </aside>
       </section>
     </main>
   </div>
