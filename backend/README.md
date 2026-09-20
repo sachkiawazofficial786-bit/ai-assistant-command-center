@@ -2,23 +2,22 @@
 
 FastAPI backend for the AI Assistant Command Center.
 
+## Real LLM connection
+
+The AI Core now uses the OpenAI Responses API when OPENAI_API_KEY is configured. Keep the key on the server; never put it in browser JavaScript.
+
 ## Run locally
 
-```bash
-cd backend
-python -m venv .venv
-# Windows:
-.venv\\Scripts\\activate
-# macOS/Linux:
-# source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
-```
+    cd backend
+    python -m venv .venv
+    # Windows: .venv\\Scripts\\activate
+    pip install -r requirements.txt
+    # PowerShell: $env:OPENAI_API_KEY="YOUR_KEY"
+    # PowerShell: $env:OPENAI_MODEL="gpt-5.6-luna"
+    uvicorn main:app --reload --port 8000
 
-API:
-- GET `/api/health`
-- POST `/api/command`
+API: GET /api/health and POST /api/command.
 
-The frontend calls `http://localhost:8000/api/command` when available and falls back to the browser command router if the backend is offline.
+The model understands Urdu, Sindhi and English and returns a structured action. Task and Review records are created by the backend. Publishing is not automatic; external actions remain behind Review Center and human approval.
 
-This is the AI Core orchestration boundary. A real LLM provider can be added behind `route_command()` later without changing the Command Center UI.
+If the API key is absent or the model request fails, the backend safely falls back.
